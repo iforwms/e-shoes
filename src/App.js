@@ -23,35 +23,34 @@ class App extends Component {
     }
 
     fetchIssues() {
-        // let data = apiResponse;
-
         axios.get('https://api.github.com/issues?filter=all')
-            .then(({ data }) => {
-                let repoGroup = _.groupBy(data, (issue) => issue.repository.name);
+        .then(({ data }) => {
+            // let data = apiResponse;
+            let repoGroup = _.groupBy(data, (issue) => issue.repository.name);
 
-                let repos = [];
+            let repos = [];
 
-                _.each(repoGroup, (repo) => {
-                    let issues = [];
+            _.each(repoGroup, (repo) => {
+                let issues = [];
 
-                    _.each(repo, (issue) => {
-                        issues.push(issue);
-                    });
-                
-                    repos.push(issues);
+                _.each(repo, (issue) => {
+                    issues.push(issue);
                 });
+            
+                repos.push(issues);
+            });
 
-                this.setState({ issues: apiResponse, repos: repos });
-            });        
+            this.setState({ issues: apiResponse, repos: repos });
+        });        
 
     }
 
     render() {
         return (
             <div>
-                <h1 className="fixed w-full shadow p-4 text-xl bg-grey-darkest text-grey-light font-normal">Open Issues</h1>
+                <h1 className="border-l-8 border-orange fixed w-full shadow p-4 text-xl bg-grey-darkest text-grey-light font-normal">Open Github Issues</h1>
 
-                <div className="flex p-4" style={{paddingTop: '70px'}}>
+                <div className="flex flex-wrap justify-around p-1 md:p-4 bg-grey-dark" style={{paddingTop: '100px'}}>
                 {
                     this.state.repos.map((issues, index) => {
                         return (

@@ -8,10 +8,12 @@ class IssueList extends Component {
         let { repo, issues } = this.props;
 
         return ( 
-            <div className="w-1/4 m-2">
-                <h3 className="mb-2 text-2xl text-grey font-normal">{_.startCase(repo)} ({issues.length})</h3>
+            <div className="mx-2 mb-8" style={{flexBasis: '420px'}}>
+                <div className="rounded shadow overflow-hidden">
+                    <h3 className="text-xl text-grey-darkest border-b-2 border-grey-dark font-normal p-4 bg-grey">
+                        {_.startCase(repo)} ({issues.length})
+                    </h3>
 
-                <div className="mb-8">
                     { issues.map(issue => <Issue key={issue.id} issue={issue}/> ) }                 
                 </div>
             </div>
