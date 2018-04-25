@@ -48,9 +48,11 @@ class App extends Component {
     render() {
         return (
             <div>
-                <h1 className="border-l-8 border-orange fixed w-full shadow p-4 text-xl bg-grey-darkest text-grey-light font-normal">Open Github Issues</h1>
+                <div className="flex items-center justify-between border-l-8 border-orange fixed w-full shadow p-4 bg-grey-darkest">
+                    <h1 className="text-xl text-grey-light font-normal">Open Github Issues</h1>
+                </div>
 
-                <div className="flex flex-wrap justify-around p-1 md:p-4 bg-grey-dark" style={{paddingTop: '100px'}}>
+                <div className="flex flex-wrap justify-around p-1 md:p-4 bg-grey-dark min-h-screen" style={{paddingTop: '100px'}}>
                 {
                     this.state.repos.map((issues, index) => {
                         return (
