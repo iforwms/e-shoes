@@ -25,7 +25,15 @@ class Issue extends Component {
                 </div>
 
                 <div className="ml-4 flex flex-col">
-                    <span className={`mb-1 ${issue.assignee && issue.assignee.login === 'iforwms' ? 'text-grey-darkest' : 'text-grey-dark'}`}>{issue.title}</span>
+                    <span 
+                        className={`mb-2 flex items-end ${issue.assignee && issue.assignee.login === 'iforwms' ? 'text-grey-darkest' : 'text-grey-dark'}`}
+                    >
+                        <span>{issue.title}</span>
+
+                        { issue.labels.map(label => 
+                            <span className="inline-block whitespace-no-wrap p-1 ml-2 text-xs text-grey-darkest rounded" style={{backgroundColor: `#${label.color}`}} key={label.id}>{label.name}</span>)
+                        }
+                    </span>
 
                     { issue.body ? <span className="text-xs mb-2">{issue.body}</span> : '' }
 
