@@ -50,6 +50,13 @@ class App extends Component {
             <div>
                 <div className="flex items-center justify-between border-l-8 border-orange fixed w-full shadow p-4 bg-grey-darkest">
                     <h1 className="text-xl text-grey-light font-normal">Open Github Issues</h1>
+                    
+                    <button 
+                        className="bg-transparent hover:bg-grey-darkest hover:border-grey-darkest text-sm text-white hover:text-white py-1 px-2 border border-white hover:border-transparent rounded" 
+                        onClick={() => this.fetchIssues()}
+                    >
+                        Refresh
+                    </button>
                 </div>
 
                 <div className="flex flex-wrap justify-around p-1 md:p-4 bg-grey-dark min-h-screen" style={{paddingTop: '100px'}}>
