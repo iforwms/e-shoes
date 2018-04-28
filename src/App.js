@@ -47,7 +47,7 @@ class App extends Component {
 
     render() {
         return (
-            <div>
+            <div className="font-sans">
                 <div className="flex items-center justify-between border-l-8 border-orange fixed w-full shadow p-4 bg-grey-darkest">
                     <h1 className="text-xl text-grey-light font-normal">Open Github Issues</h1>
                     
