@@ -2,13 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import moment from 'moment'
 import axios from 'axios'
-import _ from 'lodash'
 
 class Issue extends Component {
     markComplete(e) {
-        let data = _.split(e.target.value, ',');
-
-        axios.patch(`https://api.github.com/repos/${data[0]}/${data[1]}/issues/${data[2]}`, { state: 'closed' });
+        axios.patch(e.target.value, { state: 'closed' });
     }
 
     render() { 
@@ -19,7 +16,7 @@ class Issue extends Component {
                 <div>
                     <input 
                         type="checkbox" 
-                        value={[issue.user.login, issue.repository.name, issue.number]} 
+                        value={issue.url} 
                         onChange={ (e) => this.markComplete(e)}
                     />
                 </div>
@@ -35,7 +32,7 @@ class Issue extends Component {
                         }
                     </span>
 
-                    { issue.body ? <span className="text-xs mb-2">{issue.body}</span> : '' }
+                    { issue.body ? <span className="leading-tight text-xs mb-2">{issue.body}</span> : '' }
 
                     <span className="text-xs text-grey-dark">
                         <a className="text-grey-dark hover:text-grey-darkest" href={issue.html_url}>#{issue.number}</a> opened ({moment(issue.created_at).fromNow()}) by <a href={issue.user.html_url} className="text-grey-dark hover:text-grey-darkest">{issue.user.login}</a>
