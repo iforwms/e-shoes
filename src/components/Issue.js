@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import moment from 'moment'
-import axios from 'axios'
 
 class Issue extends Component {
-    markComplete(e) {
-        axios.patch(e.target.value, { state: 'closed' });
-    }
-
     render() { 
         let { issue } = this.props;
 
@@ -17,7 +12,7 @@ class Issue extends Component {
                     <input 
                         type="checkbox" 
                         value={issue.url} 
-                        onChange={ (e) => this.markComplete(e)}
+                        onChange={ (e) => this.props.markComplete(e)}
                     />
                 </div>
 
@@ -44,7 +39,8 @@ class Issue extends Component {
 }
 
 Issue.propTypes = {
-    issue: PropTypes.object
+    issue: PropTypes.object,
+    markComplete: PropTypes.func,
 }
  
 export default Issue

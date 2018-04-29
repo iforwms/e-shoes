@@ -16,10 +16,35 @@ class App extends Component {
         this.state = {
             repos: []
         }
+
+        this.markComplete = this.markComplete.bind(this);
+        this.newIssue = this.newIssue.bind(this);
     }
 
     componentDidMount() {
         this.fetchIssues();
+    }
+
+    markComplete(e) {
+        axios.patch(e.target.value, { state: 'closed' })
+        .then(() => {
+            this.fetchIssues();
+        });
+    }
+
+    newIssue(e) {
+        const issue = e.target.dataset.issue;
+        const url = e.target.dataset.url + '/issues';
+
+        if(issue === '') return;
+
+        axios.post(url, { title: issue })
+            .then(() => {
+                this.fetchIssues();
+            }, error => {
+                console.error(error);
+            });
+        
     }
 
     fetchIssues() {
@@ -66,6 +91,8 @@ class App extends Component {
                             <IssueList 
                                 key={index} 
                                 issues={issues}
+                                newIssue={this.newIssue}
+                                markComplete={this.markComplete}
                                 repo={issues[0].repository.name}/>
                         )
                     })
