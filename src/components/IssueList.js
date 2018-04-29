@@ -20,6 +20,20 @@ class IssueList extends Component {
         this.setState({ newIssue: '' });
     }
 
+    filterMatches(issue) {
+        let filter = this.props.filter.toLowerCase();
+
+        if(filter === '') {
+            return true;
+        }
+
+        if(issue.title.toLowerCase().includes(filter) || (issue.body && issue.body.toLowerCase().includes(filter)) || issue.user.login.includes(filter)) {
+            return true;
+        }
+
+        return false;
+    }
+
     render() { 
         let { repo, issues } = this.props;
 
@@ -50,7 +64,15 @@ class IssueList extends Component {
                         </div>
                     </div>
 
-                    { issues.map(issue => <Issue key={issue.id} issue={issue} markComplete={this.props.markComplete}/> ) }                 
+                    { issues.map(issue => {
+                        if(this.filterMatches(issue)) {
+                            return (
+                                <Issue key={issue.id} issue={issue} markComplete={this.props.markComplete}/> 
+                            )
+                        }
+
+                        return null;
+                    }) }                 
                 </div>
             </div>
          )
@@ -59,6 +81,7 @@ class IssueList extends Component {
 
 IssueList.propTypes = {
     repo: PropTypes.string,
+    filter: PropTypes.string,
     issues: PropTypes.array,
     markComplete: PropTypes.func,
     newIssue: PropTypes.func,
