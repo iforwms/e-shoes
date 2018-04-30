@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Issue from './Issue'
+import Icon from './Icon'
 
 class IssueList extends Component {
     constructor(props) {
@@ -38,11 +39,20 @@ class IssueList extends Component {
         let { repo, issues } = this.props;
 
         return ( 
-            <div className="mx-2 mb-4" style={{maxWidth: 'calc(100% - 1em)', width: '420px'}}>
+            <div className="mx-2 mb-4" style={{maxWidth: 'calc(100% - 1em)', width: '355px'}}>
                 <div className="rounded shadow overflow-hidden">
                     <div className="flex flex-col items-center justify-between border-b-2 border-grey-dark p-4 bg-grey">
                         <h3 className="text-lg mb-4 text-grey-darkest font-normal whitespace-no-wrap">
-                            <a className="text-grey-darkest hover:text-grey-dark" href={issues[0].repository.html_url}>{_.startCase(repo)}</a> ({issues.length})
+                            <Icon size="15" icon={issues[0].repository.private ? 'lock' : 'unlock'}/>
+
+                            <a 
+                                className="text-grey-darkest hover:text-grey-dark mx-2" 
+                                href={issues[0].repository.html_url}
+                            >
+                                {_.startCase(repo)}
+                            </a>
+
+                            <span>({issues[0].repository.open_issues_count})</span>
                         </h3>
                         
                         <div className="flex w-full flex-no-wrap">
