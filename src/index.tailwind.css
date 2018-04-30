@@ -1,3 +1,6 @@
 @tailwind preflight;
 @tailwind utilities;
 @tailwind components;
+
+.top-padding { margin-top: 120px; }
+@media(min-width: 576px) { .top-padding { margin-top: 80px; } }

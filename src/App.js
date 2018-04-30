@@ -141,9 +141,9 @@ class App extends Component {
                         <Spinner size="6"/>
                     </div> :
 
-                    <div className="p-1 md:p-4 bg-grey-dark min-h-screen" style={{paddingTop: '120px'}}>
+                    <div className="p-1 md:p-4 bg-grey-dark min-h-screen">
                         <Masonry
-                            className={'my-gallery-class'} // default ''
+                            className={'top-padding'} // default ''
                             elementType={'div'} // default 'div'
                             options={masonryOptions} // default {}
                             disableImagesLoaded={false} // default false
