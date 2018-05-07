@@ -39,7 +39,7 @@ class IssueList extends Component {
         let { repo, issues } = this.props;
 
         return ( 
-            <div className="mx-2 mb-4" style={{maxWidth: 'calc(100% - 1em)', width: '355px'}}>
+            <div className="m-4" style={{maxWidth: 'calc(100% - 1em)', width: '585px'}}>
                 <div className="rounded shadow overflow-hidden">
                     <div className="flex flex-col items-center justify-between border-b-2 border-grey-dark p-4 bg-grey">
                         <h3 className="text-lg mb-4 text-grey-darkest font-normal whitespace-no-wrap">
