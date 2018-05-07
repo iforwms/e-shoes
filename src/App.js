@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Spinner } from './components/spinners'
-import Icon from './components/Icon'
-import apiResponse from './stubs/issues'
+// import Icon from './components/Icon'
 
 import Nav from './components/Nav'
 import Repo from './components/Repo'

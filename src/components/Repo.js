@@ -10,6 +10,14 @@ class Repo extends Component {
         this.state = {  };
         
         console.log(props);
+
+        if(props.repo.open_issues_count) {
+            this.fetchIssues();
+        }
+    }
+
+    fetchIssues() {
+        console.log('Fetching issues: ', this.props.repo.url + '/issues');
     }
 
     render() { 
