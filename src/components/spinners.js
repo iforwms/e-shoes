@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const Spinner = props => {
   
-    const colorCode = props.dark ? '229,43,43' : '255,255,255';
+    const colorCode = props.dark ? '246, 153, 63' : '255,255,255';
 
     const Sdiv = styled.div`
         position: relative;
@@ -23,7 +23,7 @@ export const Spinner = props => {
           border-top: 1.1em solid rgba(${colorCode}, 0.2);
           border-right: 1.1em solid rgba(${colorCode}, 0.2);
           border-bottom: 1.1em solid rgba(${colorCode}, 0.2);
-          border-left: 1.1em solid ${props.dark ? '#e52b2b' : '#fff'};
+          border-left: 1.1em solid ${props.dark ? `rgb(${colorCode})` : `rgb(${colorCode})`};
           -webkit-transform: translateZ(0);
           -ms-transform: translateZ(0);
           transform: translateZ(0);

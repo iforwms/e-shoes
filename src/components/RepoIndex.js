@@ -79,9 +79,10 @@ class RepoList extends Component {
 
     render() { 
         return ( 
-            <div style={{ paddingTop: '82px' }} className="flex px-4"> 
+            <div style={{ paddingTop: '82px' }} className="flex px-4 pb-4 min-h-screen"> 
 
-                <div className="text-grey-dark pr-4 border-r">
+                <div className="text-grey-dark pr-4 border-r"  
+                    style={{ minWidth: '300px' }} >
                     <div className="flex flex-col text-sm mb-2">
                         {/* <input className="p-2 w-full rounded mb-2 border" type="text" placeholder="Filter repos"/> */}
                         <div className="flex">
@@ -103,16 +104,10 @@ class RepoList extends Component {
                     ))}
                 </div>
 
-                <div className="px-4">
-                    {this.props.repos.map((repo, index) => {
-                        if(this.state.visibleRepos.includes(repo.id)) {
-                            return (
-                                <Repo key={index} repo={repo}/>
-                            )
-                        }
-                        
-                        return null
-                    })}
+                <div className="px-4 w-full">
+                    {this.props.repos.map((repo, index) => (
+                        <Repo key={index} repo={repo} visible={this.state.visibleRepos.includes(repo.id)}/>
+                    ))}
                 </div>
             </div>
          )

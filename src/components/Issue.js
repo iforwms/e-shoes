@@ -4,10 +4,10 @@ import moment from 'moment'
 
 class Issue extends Component {
     render() { 
-        let { issue } = this.props;
+        let { issue, visible } = this.props;
 
         return ( 
-            <div className="flex items-center p-4 bg-grey-lighter hover:bg-grey-lightest text-grey-darker border-b border-grey-light">
+            <div className={`items-center p-4 bg-grey-lighter hover:bg-grey-lightest text-grey-darker border-b border-grey-light ${visible ? 'flex' : 'hidden'}`}>
                 <div>
                     <input 
                         type="checkbox" 
