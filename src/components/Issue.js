@@ -18,7 +18,7 @@ class Issue extends Component {
 
                 <div className="ml-4 flex flex-col">
                     <span 
-                        className={`mb-2 flex items-end ${issue.assignee && issue.assignee.login === 'iforwms' ? 'text-grey-darkest' : 'text-grey-dark'}`}
+                        className={`mb-2 flex items-end ${issue.assignee && issue.assignee.login === process.env.REACT_APP_GITHUB_USERNAME ? 'text-grey-darkest' : 'text-grey-dark'}`}
                     >
                         <span>{issue.title}</span>
 
@@ -30,7 +30,7 @@ class Issue extends Component {
                     { issue.body ? <span className="leading-tight text-xs mb-2">{issue.body}</span> : '' }
 
                     <span className="text-xs text-grey-dark">
-                        <a className="text-grey-dark hover:text-grey-darkest" href={issue.html_url}>#{issue.number}</a> opened ({moment(issue.created_at).fromNow()}) by <a href={issue.user.html_url} className="text-grey-dark hover:text-grey-darkest">{issue.user.login}</a>
+                        <a className="text-grey-dark hover:text-grey-darkest" target="_blank" href={issue.html_url}>#{issue.number}</a> opened ({moment(issue.created_at).fromNow()}) by <a href={issue.user.html_url} target="_blank" className="text-grey-dark hover:text-grey-darkest">{issue.user.login}</a>
                     </span>
                 </div>
             </div>
