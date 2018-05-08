@@ -24,10 +24,6 @@ class Repo extends Component {
         this.markComplete = this.markComplete.bind(this);
     }
 
-    newIssue(e) {
-        
-    }
-
     createNewIssue(e) {
         this.setState({ loaded: false });
         
@@ -52,6 +48,8 @@ class Repo extends Component {
     componentDidMount() {
         if (this.props.repo.open_issues_count) {
             this.fetchIssues();
+        } else {
+            this.setState({ loaded: true });
         }
     }
 
