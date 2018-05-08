@@ -4,7 +4,7 @@ import { Spinner } from './components/spinners'
 // import Icon from './components/Icon'
 
 import Nav from './components/Nav'
-import Repo from './components/Repo'
+import RepoList from './components/RepoList'
 
 import './index.css';
 
@@ -120,16 +120,7 @@ class App extends Component {
                 <Nav/>
 
                 <div style={{ paddingTop: '66px' }}>
-                    <div className="p-2 md:p-4">
-                        { this.state.repos.map((repo, index) => {
-                            return (
-                                <Repo
-                                    key={index}
-                                    repo={repo}
-                                />
-                            )
-                        }) }
-                    </div>
+                    <RepoList repos={this.state.repos}/>
                 </div>
             </div>
         );
