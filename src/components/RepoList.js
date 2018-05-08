@@ -79,7 +79,7 @@ class RepoList extends Component {
         return ( 
             <div className="p-2 text-grey-dark">
                 <div className="flex flex-col text-sm mb-2">
-                    <input className="p-2 w-full rounded mb-2 border" type="text" placeholder="Filter repos"/>
+                    {/* <input className="p-2 w-full rounded mb-2 border" type="text" placeholder="Filter repos"/> */}
                     <div className="flex">
                         <span onClick={this.showAll} className={`cursor-pointer rounded hover:bg-orange hover:border-orange hover:text-white mr-1 p-1 border ${this.state.tag === 'all' ? 'bg-orange text-white border-orange' : ''}`}>All</span>
                         <span onClick={this.showNone} className={`cursor-pointer rounded hover:bg-orange hover:border-orange hover:text-white mr-1 p-1 border ${this.state.tag === 'none' ? 'bg-orange text-white border-orange' : ''}`}>None</span>
