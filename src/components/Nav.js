@@ -11,8 +11,8 @@ class Nav extends Component {
     
     render() { 
         return ( 
-            <div className="flex flex-col sm:flex-row z-10 items-center justify-between border-l-8 border-orange fixed w-full shadow p-4 bg-grey-darkest">
-                <h1 className="whitespace-no-wrap mb-4 sm:mb-0 text-xl text-grey-light font-normal sm:mr-auto">Open Github Issues</h1>
+            <div className="flex z-10 items-center justify-between border-l-8 border-orange fixed w-full shadow p-4 bg-grey-darkest">
+                <h1 className="whitespace-no-wrap mr-4 sm:mb-0 text-xl text-grey-light font-normal sm:mr-auto">E-shoes</h1>
 
                 <div className="flex w-full sm:w-auto">
                     <div className="flex-1 sm:flex-auto sm:ml-4 mr-4">

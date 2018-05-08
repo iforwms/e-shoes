@@ -7,7 +7,9 @@ class Repo extends Component {
     constructor(props) {
         super(props);
         
-        this.state = {  };
+        this.state = { 
+            newIssue: ''
+         };
         
         console.log(props);
 
@@ -24,9 +26,9 @@ class Repo extends Component {
         let { repo } = this.props;
 
         return ( 
-            <div style={{ maxWidth: '450px' }} className="mb-4 flex rounded items-center justify-between border-b-2 border-grey-dark p-4 bg-grey">
-                <h3 className="text-lg mr-4 flex-1 text-grey-darkest font-normal whitespace-no-wrap">
-                    <Icon size="15" icon={repo.private ? 'lock' : 'unlock'} />
+            <div className="mb-4 flex rounded items-center justify-between border-b-2 border-grey-dark p-2 bg-grey">
+                <h3 className="text-sm mr-2 flex-1 text-grey-darkest font-normal whitespace-no-wrap">
+                    <Icon size="13" icon={repo.private ? 'lock' : 'unlock'} />
 
                     <a
                         className="text-grey-darkest hover:text-grey-dark mx-2"
@@ -43,13 +45,13 @@ class Repo extends Component {
                         type="text"
                         value={this.state.newIssue}
                         onChange={(e) => this.setState({ newIssue: e.target.value })}
-                        className="flex-1 p-2 text-sm rounded rounded-r-none"
+                        className="flex-1 p-1 text-sm rounded rounded-r-none"
                     />
 
                     <button
                         data-issue={this.state.newIssue}
                         data-url={repo.url}
-                        className="rounded rounded-l-none text-sm py-1 px-2 bg-grey-darker hover:bg-grey-darkest text-white"
+                        className="rounded rounded-l-none text-xs py-1 px-2 bg-grey-darker hover:bg-grey-darkest text-white"
                         onClick={this.createNewIssue}
                     >
                         Add
