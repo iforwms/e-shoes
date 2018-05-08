@@ -106,7 +106,7 @@ class RepoList extends Component {
 
                 <div className="px-4 w-full">
                     {this.props.repos.map((repo, index) => (
-                        <Repo key={index} repo={repo} visible={this.state.visibleRepos.includes(repo.id)}/>
+                        <Repo key={index} repo={repo} filter={this.props.filter} visible={this.state.visibleRepos.includes(repo.id)}/>
                     ))}
                 </div>
             </div>
@@ -115,7 +115,8 @@ class RepoList extends Component {
 }
 
 RepoList.propTypes = {
-    repos: PropTypes.array
+    repos: PropTypes.array,
+    filter: PropTypes.string,
 }
  
 export default RepoList;

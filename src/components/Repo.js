@@ -85,12 +85,9 @@ class Repo extends Component {
 
     fetchIssues() {
         this.setState({ loaded: false });
-        console.log('Fetching issues: ', this.props.repo.url + '/issues');
 
         axios.get(this.props.repo.url + '/issues')
             .then(({ data }) => {
-                console.log(data);
-
                 this.setState({ issues: data, loaded: true });
             }, error => {
                 console.error(error);

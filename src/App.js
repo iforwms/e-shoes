@@ -21,12 +21,16 @@ class App extends Component {
             filter: '',
         };
 
-        // this.fetchRepos = this.fetchRepos.bind(this);
-        // this.newIssue = this.newIssue.bind(this);
+        this.fetchRepos = this.fetchRepos.bind(this);
+        this.updateFilter = this.updateFilter.bind(this);
     }
 
     componentDidMount() {
         this.fetchRepos();
+    }
+
+    updateFilter(string) {
+        this.setState({ filter: string });
     }
 
     fetchRepos() {
@@ -34,8 +38,6 @@ class App extends Component {
 
         axios.get('https://api.github.com/user/repos')
         .then(({ data }) => {
-            console.log(data);
-
             this.setState({ repos: data, loaded: true });
         }, error => {
             console.error(error);
@@ -55,9 +57,9 @@ class App extends Component {
 
         return (
             <div>
-                <Nav/>
+                <Nav fetchRepos={this.fetchRepos} updateFilter={this.updateFilter}/>
 
-                <RepoIndex repos={this.state.repos}/>
+                <RepoIndex repos={this.state.repos} filter={this.state.filter}/>
             </div>
         );
     }
