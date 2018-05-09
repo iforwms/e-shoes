@@ -113,7 +113,7 @@ class Repo extends Component {
                             {_.startCase(repo.name)}
                         </a>
 
-                        <span>({repo.open_issues_count})</span>
+                        <span>({issues.length})</span>
                         
                         <span 
                             className="cursor-pointer text-grey-darkest ml-2" 
