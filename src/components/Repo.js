@@ -36,11 +36,11 @@ class Repo extends Component {
         .then(() => {
             this.fetchIssues();
 
-            this.setState({ newIssue: '' });
+            this.setState({ newIssue: '', loaded: true });
         }, error => {
             console.error(error);
 
-            this.setState({ loaded: false });
+            this.setState({ loaded: true });
         });
 
     }
@@ -54,16 +54,17 @@ class Repo extends Component {
     }
 
     
-    markComplete(e) {
+    markComplete() {
         this.setState({ loaded: false });
 
-        axios.patch(e.target.value, { state: 'closed' })
+        axios.patch(this.props.repo.url, { state: 'closed' })
         .then(() => {
             this.fetchIssues();
+            this.setState({ loaded: true });
         }, error => {
             console.error(error);
 
-            this.setState({ loaded: false });
+            this.setState({ loaded: true });
         });
     }
 
@@ -145,7 +146,6 @@ class Repo extends Component {
 
                         <button
                             data-issue={this.state.newIssue}
-                            data-url={repo.url}
                             className="rounded rounded-l-none text-xs py-1 px-2 bg-grey-darker hover:bg-grey-darkest text-white"
                             onClick={this.createNewIssue}
                         >
