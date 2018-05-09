@@ -98,8 +98,8 @@ class RepoList extends Component {
                             className="block mb-2 text-sm cursor-pointer"
                             onClick={ () => this.toggleVisibility(repo.id)}
                         >
-                            {repo.full_name} 
-                            <input className="ml-2" type="checkbox" checked={this.state.visibleRepos.includes(repo.id)} onClick={ () => this.toggleVisibility(repo.id)}/>
+                            {repo.full_name} ({repo.open_issues_count})
+                            <input className="ml-2" type="checkbox" checked={this.state.visibleRepos.includes(repo.id)}/>
                         </span>
                     ))}
                 </div>
