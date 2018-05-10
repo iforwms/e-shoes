@@ -77,7 +77,7 @@ class Issue extends Component {
                                 <img width="40" height="40" src={user.avatar_url} alt={`Avatar for ${user.login}`}/>
                             </span>
                         ))}
-                    </span>
+                    </span>     
 
                     { issue.body ? <span className="leading-tight text-xs mb-2">{issue.body}</span> : '' }
 

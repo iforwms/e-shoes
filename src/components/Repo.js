@@ -54,10 +54,10 @@ class Repo extends Component {
     }
 
     
-    markComplete() {
+    markComplete(e) {
         this.setState({ loaded: false });
 
-        axios.patch(this.props.repo.url, { state: 'closed' })
+        axios.patch(e.target.value, { state: 'closed' })
         .then(() => {
             this.fetchIssues();
             this.setState({ loaded: true });
