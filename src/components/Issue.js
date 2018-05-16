@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import moment from 'moment'
 import axios from 'axios'
+import marked from 'marked'
+import Modal from 'react-modal'
 
 import Icon from './Icon'
 
@@ -13,6 +15,7 @@ class Issue extends Component {
             collaborators: [],
             viewCollaborators: false,
             loaded: true,
+            showModal: false,
         }
 
         this.fetchCollaborators = this.fetchCollaborators.bind(this);
@@ -64,22 +67,29 @@ class Issue extends Component {
 
                 <div className="ml-4 flex flex-col flex-1">
                     <span 
-                        className={`mb-2 flex items-end ${issue.assignee && issue.assignee.login === process.env.REACT_APP_GITHUB_USERNAME ? 'text-grey-darkest' : 'text-grey-dark'}`}
+                        className={`mb-2 flex items-end text-grey-darkest`}
                     >
+                    { 
+                        issue.body ? 
+                        <span
+                            onClick={() => this.setState({ showModal: true })}
+                            className="cursor-pointer underline hover:text-orange"
+                        >
+                            {issue.title}
+                        </span> :
                         <span>{issue.title}</span>
+                    }
 
                         { issue.labels.map(label => 
                             <span className="inline-block whitespace-no-wrap p-1 ml-2 text-xs text-grey-darkest rounded" style={{backgroundColor: `#${label.color}`}} key={label.id}>{label.name}</span>)
                         }
 
                         { issue.assignees.map((user, index) => (
-                            <span key={index} className="mx-1">
-                                <img width="40" height="40" src={user.avatar_url} alt={`Avatar for ${user.login}`}/>
+                            <span key={index} className="ml-2">
+                                <img className="block rounded" width="25" height="25" src={user.avatar_url} alt={`Avatar for ${user.login}`}/>
                             </span>
                         ))}
-                    </span>     
-
-                    { issue.body ? <span className="leading-tight text-xs mb-2">{issue.body}</span> : '' }
+                    </span> 
 
                     <span className="text-xs text-grey-dark">
                         <a className="text-grey-dark hover:text-grey-darkest" target="_blank" href={issue.html_url}>#{issue.number}</a> opened ({moment(issue.created_at).fromNow()}) by <a href={issue.user.html_url} target="_blank" className="text-grey-dark hover:text-grey-darkest">{issue.user.login}</a>
@@ -106,14 +116,26 @@ class Issue extends Component {
                         ))}
                     </div>
                 </div>
+
+                {
+                    issue.body ?
+                    <Modal 
+                        isOpen={this.state.showModal} 
+                        ariaHideApp={false}
+                        style={{ overlay: { top: '64px' }}}
+                    >
+                        <span dangerouslySetInnerHTML = {{__html:marked(issue.body)}}/>
+                    </Modal> : ''
+                }
             </div>
-         )
+        )
     }
 }
 
 Issue.propTypes = {
     issue: PropTypes.object,
     markComplete: PropTypes.func,
+    visible: PropTypes.bool,
 }
  
 export default Issue

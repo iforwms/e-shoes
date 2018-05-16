@@ -4,3 +4,13 @@
 
 .top-padding { margin-top: 120px; }
 @media(min-width: 576px) { .top-padding { margin-top: 80px; } }
+
+.ReactModal__Content h1, 
+.ReactModal__Content h2 {
+    margin-bottom: 0.5em;
+}
+
+.ReactModal__Content ul {
+    line-height: 1.4;
+    margin-bottom: 1em;
+}
