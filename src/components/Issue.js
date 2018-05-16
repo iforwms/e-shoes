@@ -124,7 +124,10 @@ class Issue extends Component {
                         ariaHideApp={false}
                         style={{ overlay: { top: '64px' }}}
                     >
-                        <span dangerouslySetInnerHTML = {{__html:marked(issue.body)}}/>
+                        <div className="relative">
+                            <button className="absolute pin-t pin-r -mt-8" onClick={ () => this.setState({ showModal: false }) }><Icon icon="close"/></button>
+                            <span className="block mt-8" dangerouslySetInnerHTML = {{__html:marked(issue.body)}}/>
+                        </div>
                     </Modal> : ''
                 }
             </div>
