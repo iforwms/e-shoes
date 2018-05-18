@@ -217,7 +217,7 @@ class Repo extends Component {
 
                         {
                             this.state.modalContent ?
-                            <span className="container m-auto block mt-8" dangerouslySetInnerHTML = {{__html:marked(this.state.modalContent)}}/> : ''
+                            <span style={{ maxWidth: '800px' }} className="container m-auto block mt-8" dangerouslySetInnerHTML = {{__html:marked(this.state.modalContent)}}/> : ''
                         }
                         
                     </div>
