@@ -49,7 +49,6 @@ class Repo extends Component {
 
             this.setState({ loaded: true });
         });
-
     }
 
     componentDidMount() {
@@ -179,6 +178,7 @@ class Repo extends Component {
 
                         <button
                             data-issue={this.state.newIssue}
+                            data-url={this.props.repo.url}
                             className="rounded rounded-l-none text-xs py-1 px-2 bg-grey-darker hover:bg-grey-darkest text-white"
                             onClick={this.createNewIssue}
                         >
