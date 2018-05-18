@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Repo from './Repo'
+import Icon from './Icon'
 
 class RepoList extends Component {
     constructor(props) {
@@ -10,11 +11,13 @@ class RepoList extends Component {
         this.state = { 
             tag: 'active',
             visibleRepos: [],
+            filter: '',
          };
 
          this.showAll = this.showAll.bind(this);
          this.showActive = this.showActive.bind(this);
          this.showNone = this.showNone.bind(this);
+         this.filterRepo = this.filterRepo.bind(this);
     }
 
     componentDidMount() {
@@ -63,6 +66,12 @@ class RepoList extends Component {
         this.setState({ tag: 'none', visibleRepos: [] });
     }
 
+    filterRepo(repo) {
+        if(this.state.filter === '') return true;
+
+        return repo.full_name.toLowerCase().indexOf(this.state.filter.toLowerCase()) > -1;
+    }
+
     toggleVisibility(id) {
         if(this.state.visibleRepos.includes(id)) {
             return this.setState(prevState => ({ 
@@ -84,10 +93,20 @@ class RepoList extends Component {
                 <div className="text-grey-dark pr-4 border-r"  
                     style={{ minWidth: '300px' }} >
                     <div className="flex flex-col text-sm mb-2">
-                        {/* <input className="p-2 w-full rounded mb-2 border" type="text" placeholder="Filter repos"/> */}
+                        <div className="flex items-center justify-between mb-2">
+                            <input className="p-2 w-full mr-2 rounded border" value={this.state.filter} type="text" onChange={ (e) => this.setState({ filter: e.target.value }) } placeholder="Filter repos"/>
+
+                            <span 
+                            className="cursor-pointer" 
+                            onClick={ () => this.setState({ filter: '' }) }
+                            ><Icon icon="close"/></span>
+                        </div>
+
                         <div className="flex">
                             <span onClick={this.showAll} className={`cursor-pointer rounded hover:bg-orange hover:border-orange hover:text-white mr-1 p-1 border ${this.state.tag === 'all' ? 'bg-orange text-white border-orange' : ''}`}>All</span>
+
                             <span onClick={this.showNone} className={`cursor-pointer rounded hover:bg-orange hover:border-orange hover:text-white mr-1 p-1 border ${this.state.tag === 'none' ? 'bg-orange text-white border-orange' : ''}`}>None</span>
+
                             <span onClick={this.showActive} className={`cursor-pointer rounded hover:bg-orange hover:border-orange hover:text-white mr-1 p-1 border ${this.state.tag === 'active' ? 'bg-orange text-white border-orange' : ''}`}>Active</span>
                         </div>
                     </div>
@@ -95,7 +114,7 @@ class RepoList extends Component {
                     {this.props.repos.map((repo, index) => (
                         <span 
                             key={index}
-                            className="block mb-2 text-sm cursor-pointer"
+                            className={`block mb-2 text-sm cursor-pointer ${this.filterRepo(repo) ? 'block' : 'hidden'}`}
                             onClick={ () => this.toggleVisibility(repo.id)}
                         >
                             {repo.full_name} ({repo.open_issues_count})
