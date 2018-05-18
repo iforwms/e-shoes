@@ -5,6 +5,12 @@
 .top-padding { margin-top: 120px; }
 @media(min-width: 576px) { .top-padding { margin-top: 80px; } }
 
+.ReactModal__Content {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px 40px;
+}
+
 .ReactModal__Content h1, 
 .ReactModal__Content h2,
 .ReactModal__Content h3 {

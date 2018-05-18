@@ -88,7 +88,7 @@ class RepoList extends Component {
 
     render() { 
         return ( 
-            <div style={{ paddingTop: '82px' }} className="flex px-4 pb-4 min-h-screen"> 
+            <div style={{ paddingTop: '82px' }} className="flex mx-auto px-4 pb-4 min-h-screen justify-center"> 
 
                 <div className="text-grey-dark pr-4 border-r"  
                     style={{ minWidth: '300px' }} >
@@ -123,7 +123,7 @@ class RepoList extends Component {
                     ))}
                 </div>
 
-                <div className="px-4 w-full">
+                <div className="px-4 w-full" style={{ maxWidth: '800px' }}>
                     {this.props.repos.map((repo, index) => (
                         <Repo key={index} repo={repo} filter={this.props.filter} visible={this.state.visibleRepos.includes(repo.id)}/>
                     ))}
