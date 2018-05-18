@@ -24,6 +24,7 @@
     margin: 1em 0;
     padding: 1em;
     border: 1px solid #ccc;
+    white-space: normal;
 } 
 
 .ReactModal__Content ul, p {
