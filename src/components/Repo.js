@@ -21,10 +21,12 @@ class Repo extends Component {
             showAll: true,
             showModal: false,
             modalContent: null,
+            readme: null,
          };
 
         this.createNewIssue = this.createNewIssue.bind(this);
         this.fetchIssues = this.fetchIssues.bind(this);
+        this.showReadme = this.showReadme.bind(this);
         this.markComplete = this.markComplete.bind(this);
         this.showBody = this.showBody.bind(this);        
     }
@@ -91,6 +93,22 @@ class Repo extends Component {
     //     return false;
     // }
 
+    showReadme() {
+        if(this.state.readme) {
+            return this.setState({ showModal: true, modalContent: this.state.readme });
+        }
+
+        axios.get(this.props.repo.url + '/readme')
+            .then(({ data }) => {
+                let readme = atob(data.content);
+
+                this.setState({ showModal: true, readme: readme, modalContent: readme });
+            }, error => {
+                this.setState({ showModal: true, readme: 'No readme file.', modalContent: 'No readme file.' });
+                console.error(error);
+            });
+    }
+
     fetchIssues() {
         this.setState({ loaded: false });
 
@@ -135,6 +153,12 @@ class Repo extends Component {
                             className="cursor-pointer text-grey-darkest ml-2" 
                             onClick={ () => this.setState(prevState => ({ showAll: !prevState.showAll })) }>
                             <Icon size="18" icon={this.state.showAll ? 'users' : 'user'}/>
+                        </span>
+                        
+                        <span 
+                            className="cursor-pointer text-grey-darkest ml-2" 
+                            onClick={this.showReadme}>
+                            <Icon size="18" icon="book"/>
                         </span>
                         
                         <span 
