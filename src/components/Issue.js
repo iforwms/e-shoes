@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import moment from 'moment'
 import axios from 'axios'
-import marked from 'marked'
-import Modal from 'react-modal'
 
 import Icon from './Icon'
 
@@ -15,7 +13,6 @@ class Issue extends Component {
             collaborators: [],
             viewCollaborators: false,
             loaded: true,
-            showModal: false,
         }
 
         this.fetchCollaborators = this.fetchCollaborators.bind(this);
@@ -72,7 +69,7 @@ class Issue extends Component {
                     { 
                         issue.body ? 
                         <span
-                            onClick={() => this.setState({ showModal: true })}
+                            onClick={() => this.props.showBody(issue.body) }
                             className="cursor-pointer underline hover:text-orange"
                         >
                             {issue.title}
@@ -116,20 +113,6 @@ class Issue extends Component {
                         ))}
                     </div>
                 </div>
-
-                {
-                    issue.body ?
-                    <Modal 
-                        isOpen={this.state.showModal} 
-                        ariaHideApp={false}
-                        style={{ overlay: { top: '64px' }}}
-                    >
-                        <div className="relative">
-                            <button className="absolute pin-t pin-r -mt-8" onClick={ () => this.setState({ showModal: false }) }><Icon icon="close"/></button>
-                            <span className="container m-auto block mt-8" dangerouslySetInnerHTML = {{__html:marked(issue.body)}}/>
-                        </div>
-                    </Modal> : ''
-                }
             </div>
         )
     }
@@ -139,6 +122,7 @@ Issue.propTypes = {
     issue: PropTypes.object,
     markComplete: PropTypes.func,
     visible: PropTypes.bool,
+    showBody: PropTypes.func,
 }
  
 export default Issue

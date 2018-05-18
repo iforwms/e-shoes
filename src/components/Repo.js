@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Icon from './Icon'
 import axios from 'axios'
-import { Spinner } from './spinners'
+import marked from 'marked'
+import Modal from 'react-modal'
 
+import { Spinner } from './spinners'
 import Issue from './Issue'
 
 class Repo extends Component {
@@ -17,11 +19,14 @@ class Repo extends Component {
             loaded: false,
             showIssues: true,
             showAll: true,
+            showModal: false,
+            modalContent: null,
          };
 
         this.createNewIssue = this.createNewIssue.bind(this);
         this.fetchIssues = this.fetchIssues.bind(this);
         this.markComplete = this.markComplete.bind(this);
+        this.showBody = this.showBody.bind(this);        
     }
 
     createNewIssue(e) {
@@ -66,6 +71,10 @@ class Repo extends Component {
 
             this.setState({ loaded: true });
         });
+    }
+
+    showBody(body) {
+        this.setState({ showModal: true, modalContent: body });
     }
 
     // filterMatches(issue) {
@@ -158,19 +167,37 @@ class Repo extends Component {
                     this.state.loaded ?
                     <div className={this.state.showIssues ? 'block' : 'hidden'}>
                         {issues.map(issue => {
-                            {/* if (this.filterMatches(issue)) { */}
-                                return (
-                                    <Issue key={issue.id} issue={issue} markComplete={this.markComplete} visible={this.state.showAll ? true : issue.assignee && issue.assignee.login === process.env.REACT_APP_GITHUB_USERNAME}/>
-                                )
-                            {/* } */}
-
-                            {/* return null; */}
+                            return (
+                                <Issue 
+                                    key={issue.id} 
+                                    issue={issue} 
+                                    markComplete={this.markComplete} 
+                                    visible={this.state.showAll ? true : issue.assignee && issue.assignee.login === process.env.REACT_APP_GITHUB_USERNAME}
+                                    showBody={this.showBody}
+                                />
+                            )
                         })} 
                     </div> :
                     <div className="p-8 bg-grey-lighter">
                         <Spinner dark size="3"/>
                     </div>
-                }                
+                }
+
+                <Modal 
+                    isOpen={this.state.showModal} 
+                    ariaHideApp={false}
+                    style={{ overlay: { top: '64px' }}}
+                >
+                    <div className="relative">
+                        <button className="absolute pin-t pin-r -mt-8" onClick={ () => this.setState({ showModal: false }) }><Icon icon="close"/></button>
+
+                        {
+                            this.state.modalContent ?
+                            <span className="container m-auto block mt-8" dangerouslySetInnerHTML = {{__html:marked(this.state.modalContent)}}/> : ''
+                        }
+                        
+                    </div>
+                </Modal>           
             </div>
          )
     }
